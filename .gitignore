@@ -11,7 +11,6 @@ build/
 *.so.*
 *.dll
 *.dylib
-*.ico
 
 # Qt-es
 object_script.*.Release
