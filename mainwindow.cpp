@@ -46,6 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
     green = QColor(0x98, 0x97, 0x1a);
 
     graph_setup();
+    channels_set_style();
 }
 
 MainWindow::~MainWindow()
@@ -245,6 +246,49 @@ void MainWindow::graph_plot()
     ui->button_save_graph->setEnabled(true);
 }
 
+void MainWindow::channels_set_style()
+{
+    ui->checkbox_cpm->setStyleSheet(
+        "QCheckBox {"
+        "   border-radius: 4px;"
+        "}"
+        "QCheckBox::indicator::checked {"
+        "   background: #fabd2f;"
+        "   border-radius: 4px;"
+        "}"
+    );
+
+    ui->checkbox_avg_cpm->setStyleSheet(
+        "QCheckBox {"
+        "   border-radius: 4px;"
+        "}"
+        "QCheckBox::indicator::checked {"
+        "   background: #fb4934;"
+        "   border-radius: 4px;"
+        "}"
+    );
+
+    ui->checkbox_usv->setStyleSheet(
+        "QCheckBox {"
+        "   border-radius: 4px;"
+        "}"
+        "QCheckBox::indicator::checked {"
+        "   background: #458588;"
+        "   border-radius: 4px;"
+        "}"
+    );
+
+    ui->checkbox_avg_usv->setStyleSheet(
+        "QCheckBox {"
+        "   border-radius: 4px;"
+        "}"
+        "QCheckBox::indicator::checked {"
+        "   background: #98971a;"
+        "   border-radius: 4px;"
+        "}"
+    );
+}
+
 /* ========== UI EVENTS ========= */
 
 void MainWindow::on_list_ports_itemSelectionChanged()
@@ -371,7 +415,6 @@ void MainWindow::on_button_export_clicked()
     }
 }
 
-
 void MainWindow::on_button_clear_graph_clicked()
 {
     cpm_series->clear();
@@ -381,7 +424,6 @@ void MainWindow::on_button_clear_graph_clicked()
 
     ui->button_save_graph->setEnabled(false);
 }
-
 
 void MainWindow::on_button_save_graph_clicked()
 {
@@ -395,5 +437,25 @@ void MainWindow::on_button_save_graph_clicked()
     } else {
         QMessageBox::critical(this, "Error", "Unable to save image");
     }
+}
+
+void MainWindow::on_checkbox_cpm_checkStateChanged(const Qt::CheckState &state)
+{
+    cpm_series->setVisible(state == Qt::Unchecked ? false : true);
+}
+
+void MainWindow::on_checkbox_avg_cpm_checkStateChanged(const Qt::CheckState &state)
+{
+    avg_cpm_series->setVisible(state == Qt::Unchecked ? false : true);
+}
+
+void MainWindow::on_checkbox_usv_checkStateChanged(const Qt::CheckState &state)
+{
+    usv_series->setVisible(state == Qt::Unchecked ? false : true);
+}
+
+void MainWindow::on_checkbox_avg_usv_checkStateChanged(const Qt::CheckState &state)
+{
+    avg_usv_series->setVisible(state == Qt::Unchecked ? false : true);
 }
 

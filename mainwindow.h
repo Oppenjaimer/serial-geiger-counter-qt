@@ -46,6 +46,14 @@ private slots:
 
     void on_button_save_graph_clicked();
 
+    void on_checkbox_cpm_checkStateChanged(const Qt::CheckState &state);
+
+    void on_checkbox_avg_cpm_checkStateChanged(const Qt::CheckState &state);
+
+    void on_checkbox_usv_checkStateChanged(const Qt::CheckState &state);
+
+    void on_checkbox_avg_usv_checkStateChanged(const Qt::CheckState &state);
+
 private:
     Ui::MainWindow *ui;
     QSerialPort *port;
@@ -76,5 +84,6 @@ private:
     bool output_valid_format();
     void graph_setup();
     void graph_plot();
+    void channels_set_style();
 };
 #endif // MAINWINDOW_H
